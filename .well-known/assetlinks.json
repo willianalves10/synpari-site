@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.synpariapp.synpari",
+      "sha256_cert_fingerprints": [
+        "1B:34:F2:39:0B:F8:56:77:FA:A6:8A:5B:72:AD:CD:D8:71:31:31:CA:EF:8E:F3:63:DB:C9:6C:5B:33:EC:A5:59"
+      ]
+    }
+  }
+]

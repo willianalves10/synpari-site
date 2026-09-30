@@ -1,0 +1,100 @@
+<!doctype html>
+<!--
+  Serves every unknown path on GitHub Pages. /join/CODE shows the invite;
+  anything else shows "page not found".
+
+  It tries to open the app and, when the app is not installed (or the phone is
+  not Android), shows the code and the store link.
+  STORE_URL is empty until the app is on Google Play (the button stays hidden).
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Synpari</title>
+  <meta name="robots" content="noindex" />
+  <style>
+    :root { --pine: #0E5A52; --deep: #0B3F39; --mint: #E4EFEB; --paper: #F6F5F1; --ink: #15171C; --slate: #5B6068; --line: #E7E5DF; }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px;
+           background: var(--paper); color: var(--ink); font-family: "Manrope", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+    main { width: 100%; max-width: 420px; text-align: center; }
+    .logo { width: 88px; height: auto; margin: 0 auto 8px; display: block; }
+    h1 { font-family: "Instrument Serif", Georgia, serif; font-weight: 400; font-size: 36px; line-height: 1.1; margin: 8px 0; letter-spacing: -0.4px; }
+    p { color: var(--slate); font-size: 16px; line-height: 1.45; margin: 8px 0; }
+    .code { display: inline-block; margin: 18px 0 6px; padding: 14px 22px; background: #fff; border: 1px solid var(--line); border-radius: 20px;
+            font-size: 34px; font-weight: 800; letter-spacing: 6px; color: var(--deep); }
+    .btn { display: block; width: 100%; margin-top: 12px; padding: 16px; border-radius: 16px; font-size: 16px; font-weight: 800; text-decoration: none; }
+    .primary { background: var(--pine); color: #fff; }
+    .secondary { background: var(--mint); color: var(--deep); }
+    .hint { font-size: 13px; }
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+  <main>
+    <svg class="logo" viewBox="0 0 600 420" fill="none" aria-hidden="true">
+      <circle cx="210" cy="210" r="165" fill="#0B6B61" />
+      <circle cx="390" cy="210" r="165" fill="#A7DED0" />
+      <path d="M300 71.7A165 165 0 0 1 300 348.3A165 165 0 0 1 300 71.7Z" fill="#083F3A" />
+    </svg>
+
+    <h1 id="title">You were invited to Synpari</h1>
+    <p id="subtitle">Opening the app...</p>
+
+    <div id="fallback" hidden>
+      <p id="fallback-text">If the app did not open, install it and use this code:</p>
+      <div class="code" id="code">------</div>
+      <a class="btn primary" id="open" href="#">Open in the app</a>
+      <a class="btn secondary" id="store" href="#" hidden>Get Synpari</a>
+      <p class="hint" id="hint">Open Synpari, choose "I have a code" and type the code above.</p>
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      var STORE_URL = "";
+      var T = {
+        en: { notFound: "Page not found", title: "You were invited to Synpari", opening: "Opening the app...", fallback: "If the app did not open, install it and use this code:", open: "Open in the app", store: "Get Synpari", hint: "Open Synpari, choose \"I have a code\" and type the code above." },
+        pt: { notFound: "Página não encontrada", title: "Você foi convidado para o Synpari", opening: "Abrindo o app...", fallback: "Se o app não abriu, instale-o e use este código:", open: "Abrir no app", store: "Baixar o Synpari", hint: "Abra o Synpari, escolha \"Tenho um código\" e digite o código acima." },
+        es: { notFound: "Página no encontrada", title: "Te invitaron a Synpari", opening: "Abriendo la app...", fallback: "Si la app no se abrió, instálala y usa este código:", open: "Abrir en la app", store: "Descargar Synpari", hint: "Abre Synpari, elige \"Tengo un código\" y escribe el código de arriba." }
+      };
+      var lang = (navigator.language || "en").slice(0, 2);
+      var t = T[lang] || T.en;
+
+      // The code is the last path segment: /join/ABC123
+      var parts = location.pathname.split("/").filter(Boolean);
+      if (parts[0] !== "join") { document.getElementById("title").textContent = t.notFound; document.getElementById("subtitle").innerHTML = "<a href=\"/\">synpariapp.com</a>"; return; }
+      var code = decodeURIComponent(parts[parts.length - 1] || "").toUpperCase().replace(/[^A-Z0-9]/g, "");
+
+      document.documentElement.lang = lang;
+      document.getElementById("title").textContent = t.title;
+      document.getElementById("subtitle").textContent = t.opening;
+      document.getElementById("fallback-text").textContent = t.fallback;
+      document.getElementById("open").textContent = t.open;
+      document.getElementById("store").textContent = t.store;
+      if (STORE_URL) { var s = document.getElementById("store"); s.href = STORE_URL; s.hidden = false; }
+      document.getElementById("hint").textContent = t.hint;
+      document.getElementById("code").textContent = code || "------";
+
+      var appLink = "synpari://join/" + encodeURIComponent(code);
+      document.getElementById("open").setAttribute("href", appLink);
+
+      function showFallback() {
+        document.getElementById("subtitle").hidden = true;
+        document.getElementById("fallback").hidden = false;
+      }
+
+      if (!code) { showFallback(); return; }
+
+      // If the app is installed (and App Links are not already handling this address), this opens it.
+      var started = Date.now();
+      window.location.href = appLink;
+      setTimeout(function () {
+        // Still here after 1.5s: the app did not take over.
+        if (Date.now() - started < 4000) showFallback();
+      }, 1500);
+    })();
+  </script>
+</body>
+</html>
