@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Synpari — Delete account</title>
+  <meta name="description" content="Delete your Synpari account / Excluir conta / Eliminar cuenta." />
+  <meta name="theme-color" content="#F6F5F1" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 420'%3E%3Ccircle cx='210' cy='210' r='165' fill='%230B6B61'/%3E%3Ccircle cx='390' cy='210' r='165' fill='%23A7DED0'/%3E%3Cpath d='M300 71.7A165 165 0 0 1 300 348.3A165 165 0 0 1 300 71.7Z' fill='%23083F3A'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Manrope:wght@500;700;800&display=swap" />
+  <style>
+    :root { --pine: #0E5A52; --deep: #0B3F39; --mint: #E4EFEB; --paper: #F6F5F1; --ink: #15171C; --slate: #5B6068; --line: #E7E5DF; }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; display: flex; flex-direction: column; background: var(--paper); color: var(--ink);
+           font-family: "Manrope", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; -webkit-font-smoothing: antialiased; }
+    header { width: 100%; max-width: 720px; margin: 0 auto; padding: 28px 20px 0; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+    .brand { display: inline-flex; align-items: center; gap: 10px; color: var(--ink); text-decoration: none; font-weight: 800; font-size: 20px; letter-spacing: -0.5px; }
+    .brand svg { width: 44px; height: auto; }
+    .langs { display: inline-flex; gap: 6px; }
+    .langs button { font: inherit; font-weight: 700; font-size: 13px; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line); background: #fff; color: var(--slate); cursor: pointer; min-height: 36px; }
+    .langs button[aria-pressed="true"] { background: var(--pine); border-color: var(--pine); color: #fff; }
+    main { flex: 1; width: 100%; max-width: 720px; margin: 0 auto; padding: 24px 20px 40px; }
+    h1 { font-family: "Instrument Serif", Georgia, serif; font-weight: 400; font-size: clamp(36px, 7vw, 52px); line-height: 1.05; letter-spacing: -1px; margin: 16px 0 8px; }
+    h2 { font-size: 19px; font-weight: 800; margin: 32px 0 8px; letter-spacing: -0.2px; }
+    p, li { color: var(--slate); font-size: 16px; line-height: 1.6; }
+    p { margin: 8px 0; }
+    ul { padding-left: 22px; margin: 8px 0; }
+    li { margin: 4px 0; }
+    strong { color: var(--ink); }
+    a { color: var(--pine); font-weight: 700; }
+    .meta { display: inline-block; margin-top: 4px; padding: 6px 14px; border-radius: 999px; background: var(--mint); color: var(--deep); font-weight: 700; font-size: 14px; }
+    [data-lang] { display: none; }
+    [data-lang].on { display: block; }
+    footer { padding: 24px 20px 32px; text-align: center; font-size: 14px; color: var(--slate); }
+    footer a { margin: 0 8px; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <header>
+    <a class="brand" href="/">
+      <svg viewBox="0 0 600 420" fill="none" aria-hidden="true">
+        <circle cx="210" cy="210" r="165" fill="#0B6B61" />
+        <circle cx="390" cy="210" r="165" fill="#A7DED0" />
+        <path d="M300 71.7A165 165 0 0 1 300 348.3A165 165 0 0 1 300 71.7Z" fill="#083F3A" />
+      </svg>
+      Synpari
+    </a>
+    <div class="langs" role="group" aria-label="Language">
+      <button type="button" data-set="en">English</button>
+      <button type="button" data-set="pt">Português</button>
+      <button type="button" data-set="es">Español</button>
+    </div>
+  </header>
+
+  <main>
+    <div data-lang="en">
+      <h1>Delete your account</h1>
+      <span class="meta">Requests answered within 30 days</span>
+      <h2>In the app (fastest)</h2>
+      <ul>
+        <li>Open Synpari and go to <strong>Settings → Account</strong>.</li>
+        <li>Tap <strong>Delete my account</strong> (at the end of the card).</li>
+        <li>Read what happens, type <strong>DELETE</strong> and confirm.</li>
+      </ul>
+      <p>The deletion is immediate and cannot be undone. Afterwards you can create a new account with the same e-mail, starting from zero.</p>
+      <h2>By e-mail (if you no longer have the app)</h2>
+      <p>Write to <a href="mailto:wn@synpariapp.com">wn@synpariapp.com</a> from the e-mail address you used to sign in, with the subject "Delete my account". We may ask you to confirm it is you. We complete the request <strong>within 30 days</strong> and confirm by e-mail.</p>
+      <h2>What is erased</h2>
+      <ul>
+        <li>Your profile (name, e-mail, preferences), your sign-in and any Plus benefit tied to your account.</li>
+        <li>Your push notification token, the notifications and reminders for you, and the invites you created.</li>
+        <li>Error reports linked to you; installation records lose the link to your account.</li>
+        <li>Every space where nobody else takes part, deleted entirely with its bills, recurring bills, cards and categories.</li>
+      </ul>
+      <h2>What stays</h2>
+      <ul>
+        <li>In spaces shared with other people, the bills, shares, settlements and history stay for them, so their totals and balances do not change. You appear as <strong>"Former member"</strong>, without your name or e-mail.</li>
+        <li>Recurring bills you took part in are paused (anyone in the space can resume them).</li>
+        <li>Anonymous, aggregated usage statistics.</li>
+      </ul>
+      <p>More details in the <a href="/privacy/">Privacy Policy</a>.</p>
+    </div>
+    <div data-lang="pt">
+      <h1>Excluir sua conta</h1>
+      <span class="meta">Pedidos atendidos em até 30 dias</span>
+      <h2>No app (mais rápido)</h2>
+      <ul>
+        <li>Abra o Synpari e vá em <strong>Ajustes → Conta</strong>.</li>
+        <li>Toque em <strong>Excluir minha conta</strong> (no fim do cartão).</li>
+        <li>Leia o que acontece, digite <strong>EXCLUIR</strong> e confirme.</li>
+      </ul>
+      <p>A exclusão é imediata e não pode ser desfeita. Depois você pode criar uma conta nova com o mesmo e-mail, começando do zero.</p>
+      <h2>Por e-mail (se você não tem mais o app)</h2>
+      <p>Escreva para <a href="mailto:wn@synpariapp.com">wn@synpariapp.com</a> do e-mail que você usava para entrar, com o assunto "Excluir minha conta". Podemos pedir uma confirmação de que é você. Concluímos o pedido <strong>em até 30 dias</strong> e avisamos por e-mail.</p>
+      <h2>O que é apagado</h2>
+      <ul>
+        <li>Seu perfil (nome, e-mail, preferências), seu login e qualquer benefício Plus ligado à sua conta.</li>
+        <li>Seu token de notificações push, as notificações e lembretes para você e os convites que você criou.</li>
+        <li>Relatórios de erro ligados a você; os registros de instalação perdem o vínculo com sua conta.</li>
+        <li>Todo espaço em que mais ninguém participa, apagado por inteiro com suas contas, recorrentes, cartões e categorias.</li>
+      </ul>
+      <h2>O que fica</h2>
+      <ul>
+        <li>Nos espaços compartilhados com outras pessoas, as contas, partes, acertos e o histórico ficam para elas, então os totais e saldos delas não mudam. Você aparece como <strong>"Ex-membro"</strong>, sem nome nem e-mail.</li>
+        <li>As contas recorrentes de que você participava ficam pausadas (qualquer pessoa do espaço pode retomá-las).</li>
+        <li>Estatísticas de uso anônimas e agregadas.</li>
+      </ul>
+      <p>Mais detalhes na <a href="/privacy/">Política de Privacidade</a>.</p>
+    </div>
+    <div data-lang="es">
+      <h1>Eliminar tu cuenta</h1>
+      <span class="meta">Solicitudes atendidas en un máximo de 30 días</span>
+      <h2>En la app (lo más rápido)</h2>
+      <ul>
+        <li>Abre Synpari y ve a <strong>Ajustes → Cuenta</strong>.</li>
+        <li>Toca <strong>Eliminar mi cuenta</strong> (al final de la tarjeta).</li>
+        <li>Lee lo que pasa, escribe <strong>ELIMINAR</strong> y confirma.</li>
+      </ul>
+      <p>La eliminación es inmediata y no se puede deshacer. Después puedes crear una cuenta nueva con el mismo correo, empezando de cero.</p>
+      <h2>Por correo (si ya no tienes la app)</h2>
+      <p>Escribe a <a href="mailto:wn@synpariapp.com">wn@synpariapp.com</a> desde el correo con el que iniciabas sesión, con el asunto "Eliminar mi cuenta". Podemos pedirte que confirmes que eres tú. Completamos la solicitud <strong>en un máximo de 30 días</strong> y te avisamos por correo.</p>
+      <h2>Qué se borra</h2>
+      <ul>
+        <li>Tu perfil (nombre, correo, preferencias), tu acceso y cualquier beneficio Plus ligado a tu cuenta.</li>
+        <li>Tu token de notificaciones push, las notificaciones y recordatorios para ti y las invitaciones que creaste.</li>
+        <li>Informes de errores vinculados a ti; los registros de instalación pierden el vínculo con tu cuenta.</li>
+        <li>Todo espacio en el que no participa nadie más, eliminado por completo con sus cuentas, recurrentes, tarjetas y categorías.</li>
+      </ul>
+      <h2>Qué se queda</h2>
+      <ul>
+        <li>En los espacios compartidos con otras personas, las cuentas, partes, acuerdos y el historial se quedan para ellas, así que sus totales y saldos no cambian. Apareces como <strong>"Ex miembro"</strong>, sin nombre ni correo.</li>
+        <li>Las cuentas recurrentes en las que participabas quedan en pausa (cualquier persona del espacio puede reanudarlas).</li>
+        <li>Estadísticas de uso anónimas y agregadas.</li>
+      </ul>
+      <p>Más detalles en la <a href="/privacy/">Política de Privacidad</a>.</p>
+    </div>
+  </main>
+
+  <footer>
+    © <span id="year">2026</span> Synpari ·
+    <a href="/privacy/">Privacy / Privacidade / Privacidad</a>
+    <a href="/delete-account/">Delete account / Excluir conta / Eliminar cuenta</a>
+  </footer>
+
+  <script>
+    (function () {
+      var supported = ["en", "pt", "es"];
+      var params = new URLSearchParams(location.search);
+      var lang = (params.get("lang") || (navigator.language || "en").slice(0, 2)).toLowerCase();
+      if (supported.indexOf(lang) < 0) lang = "en";
+      function show(next) {
+        lang = next;
+        document.documentElement.lang = next;
+        document.querySelectorAll("[data-lang]").forEach(function (el) { el.classList.toggle("on", el.getAttribute("data-lang") === next); });
+        document.querySelectorAll("[data-set]").forEach(function (b) { b.setAttribute("aria-pressed", b.getAttribute("data-set") === next ? "true" : "false"); });
+        var titles = { en: "Synpari — Delete account", pt: "Synpari — Excluir conta", es: "Synpari — Eliminar cuenta" };
+        document.title = titles[next];
+      }
+      document.querySelectorAll("[data-set]").forEach(function (b) { b.addEventListener("click", function () { show(b.getAttribute("data-set")); }); });
+      document.getElementById("year").textContent = new Date().getFullYear();
+      show(lang);
+    })();
+  </script>
+</body>
+</html>

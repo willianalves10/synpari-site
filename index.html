@@ -37,13 +37,17 @@
     <p id="lede">Organize the bills you share with your partner, roommates or family: who pays what, what is still pending and how much you spent together.</p>
     <span class="soon" id="soon">Coming soon to Google Play</span>
   </main>
-  <footer>© <span id="year">2026</span> Synpari</footer>
+  <footer>
+    © <span id="year">2026</span> Synpari ·
+    <a href="/privacy/" id="lk-privacy">Privacy policy</a>
+    <a href="/delete-account/" id="lk-delete">Delete account</a>
+  </footer>
   <script>
     (function () {
       var T = {
-        en: { tagline: "Shared expenses, made simple.", lede: "Organize the bills you share with your partner, roommates or family: who pays what, what is still pending and how much you spent together.", soon: "Coming soon to Google Play" },
-        pt: { tagline: "Despesas compartilhadas, sem complicação.", lede: "Organize as contas que você divide com quem mora ou convive com você: quem paga o quê, o que ainda falta pagar e quanto vocês gastaram juntos.", soon: "Em breve na Google Play" },
-        es: { tagline: "Gastos compartidos, sin complicaciones.", lede: "Organiza las cuentas que compartes con tu pareja, compañeros de piso o familia: quién paga qué, qué falta por pagar y cuánto gastaron juntos.", soon: "Próximamente en Google Play" }
+        en: { tagline: "Shared expenses, made simple.", lede: "Organize the bills you share with your partner, roommates or family: who pays what, what is still pending and how much you spent together.", soon: "Coming soon to Google Play", privacy: "Privacy policy", del: "Delete account" },
+        pt: { tagline: "Despesas compartilhadas, sem complicação.", lede: "Organize as contas que você divide com quem mora ou convive com você: quem paga o quê, o que ainda falta pagar e quanto vocês gastaram juntos.", soon: "Em breve na Google Play", privacy: "Política de privacidade", del: "Excluir conta" },
+        es: { tagline: "Gastos compartidos, sin complicaciones.", lede: "Organiza las cuentas que compartes con tu pareja, compañeros de piso o familia: quién paga qué, qué falta por pagar y cuánto gastaron juntos.", soon: "Próximamente en Google Play", privacy: "Política de privacidad", del: "Eliminar cuenta" }
       };
       var lang = (navigator.language || "en").slice(0, 2);
       var t = T[lang] || T.en;
@@ -51,6 +55,8 @@
       document.getElementById("tagline").textContent = t.tagline;
       document.getElementById("lede").textContent = t.lede;
       document.getElementById("soon").textContent = t.soon;
+      document.getElementById("lk-privacy").textContent = t.privacy;
+      document.getElementById("lk-delete").textContent = t.del;
       document.getElementById("year").textContent = new Date().getFullYear();
     })();
   </script>
