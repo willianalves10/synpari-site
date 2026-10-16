@@ -1,0 +1,10 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["79ZZ2S7NLM.com.synpariapp.synpari"],
+        "components": [ { "/": "/join/*" }, { "/": "/join" } ]
+      }
+    ]
+  }
+}
