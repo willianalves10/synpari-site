@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Synpari</title>
-  <meta name="description" content="Shared expenses, made simple." />
+  <title>Synpari: Bills &amp; Expenses</title>
+  <meta name="description" content="Track your monthly bills: what's due, what's paid and who you share them with. Use it on your own or with the people you live with." />
   <meta name="theme-color" content="#F6F5F1" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 420'%3E%3Ccircle cx='210' cy='210' r='165' fill='%230B6B61'/%3E%3Ccircle cx='390' cy='210' r='165' fill='%23A7DED0'/%3E%3Cpath d='M300 71.7A165 165 0 0 1 300 348.3A165 165 0 0 1 300 71.7Z' fill='%23083F3A'/%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -20,7 +20,9 @@
     .word { font-size: 22px; font-weight: 800; letter-spacing: -0.6px; margin-top: 10px; }
     h1 { font-family: "Instrument Serif", Georgia, serif; font-weight: 400; font-size: clamp(40px, 8vw, 64px); line-height: 1.02; letter-spacing: -1px; margin: 40px 0 16px; text-wrap: balance; }
     p { color: var(--slate); font-size: 18px; line-height: 1.5; margin: 0; max-width: 46ch; }
-    .soon { margin-top: 32px; display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; background: var(--mint); color: var(--deep); font-weight: 700; font-size: 15px; }
+    .store { margin-top: 32px; display: inline-flex; align-items: center; justify-content: center; padding: 14px 28px; border-radius: 999px; background: var(--deep); color: #fff; font-weight: 800; font-size: 16px; text-decoration: none; }
+    .store:hover, .store:focus-visible { background: var(--pine); }
+    .ios { margin-top: 12px; font-size: 13px; color: var(--slate); }
     footer { padding: 24px 20px 32px; text-align: center; font-size: 14px; color: var(--slate); }
     footer a { color: var(--pine); font-weight: 700; text-decoration: none; margin: 0 8px; }
   </style>
@@ -33,9 +35,10 @@
       <path d="M300 71.7A165 165 0 0 1 300 348.3A165 165 0 0 1 300 71.7Z" fill="#083F3A" />
     </svg>
     <div class="word">Synpari</div>
-    <h1 id="tagline">Shared expenses, made simple.</h1>
-    <p id="lede">Organize the bills you share with your partner, roommates or family: who pays what, what is still pending and how much you spent together.</p>
-    <span class="soon" id="soon">Coming soon to Google Play</span>
+    <h1 id="tagline">Your monthly bills, organized.</h1>
+    <p id="lede">Keep track of what's due, what's paid and what's left. Use it on your own, or invite the people you live with to split the household bills.</p>
+    <a class="store" id="store" href="https://play.google.com/store/apps/details?id=com.synpariapp.synpari">Get it on Google Play</a>
+    <div class="ios" id="ios">iPhone coming soon</div>
   </main>
   <footer>
     © <span id="year">2026</span> Synpari ·
@@ -45,16 +48,19 @@
   <script>
     (function () {
       var T = {
-        en: { tagline: "Shared expenses, made simple.", lede: "Organize the bills you share with your partner, roommates or family: who pays what, what is still pending and how much you spent together.", soon: "Coming soon to Google Play", privacy: "Privacy policy", del: "Delete account" },
-        pt: { tagline: "Despesas compartilhadas, sem complicação.", lede: "Organize as contas que você divide com quem mora ou convive com você: quem paga o quê, o que ainda falta pagar e quanto vocês gastaram juntos.", soon: "Em breve na Google Play", privacy: "Política de privacidade", del: "Excluir conta" },
-        es: { tagline: "Gastos compartidos, sin complicaciones.", lede: "Organiza las cuentas que compartes con tu pareja, compañeros de piso o familia: quién paga qué, qué falta por pagar y cuánto gastaron juntos.", soon: "Próximamente en Google Play", privacy: "Política de privacidad", del: "Eliminar cuenta" }
+        en: { title: "Synpari: Bills & Expenses", desc: "Track your monthly bills: what's due, what's paid and who you share them with. Use it on your own or with the people you live with.", tagline: "Your monthly bills, organized.", lede: "Keep track of what's due, what's paid and what's left. Use it on your own, or invite the people you live with to split the household bills.", store: "Get it on Google Play", ios: "iPhone coming soon", privacy: "Privacy policy", del: "Delete account" },
+        pt: { title: "Synpari: Contas e Despesas", desc: "Organize suas contas do mês: o que vence, o que pagou e quem divide com você. Use sozinho ou com quem mora com você.", tagline: "Suas contas do mês, organizadas.", lede: "Acompanhe o que vence, o que já foi pago e o que ainda falta. Use sozinho, ou convide quem mora com você para dividir as contas da casa.", store: "Disponível no Google Play", ios: "Em breve para iPhone", privacy: "Política de privacidade", del: "Excluir conta" },
+        es: { title: "Synpari: Cuentas y Gastos", desc: "Organiza tus cuentas del mes: qué vence, qué pagaste y con quién las compartes. Úsalo solo o con quienes viven contigo.", tagline: "Tus cuentas del mes, organizadas.", lede: "Sigue qué vence, qué ya pagaste y qué falta. Úsalo solo, o invita a quienes viven contigo para dividir las cuentas de la casa.", store: "Disponible en Google Play", ios: "Próximamente para iPhone", privacy: "Política de privacidad", del: "Eliminar cuenta" }
       };
       var lang = (navigator.language || "en").slice(0, 2);
       var t = T[lang] || T.en;
-      document.documentElement.lang = lang;
+      document.documentElement.lang = T[lang] ? lang : "en";
       document.getElementById("tagline").textContent = t.tagline;
       document.getElementById("lede").textContent = t.lede;
-      document.getElementById("soon").textContent = t.soon;
+      document.title = t.title;
+      document.querySelector('meta[name="description"]').setAttribute("content", t.desc);
+      document.getElementById("store").textContent = t.store;
+      document.getElementById("ios").textContent = t.ios;
       document.getElementById("lk-privacy").textContent = t.privacy;
       document.getElementById("lk-delete").textContent = t.del;
       document.getElementById("year").textContent = new Date().getFullYear();
