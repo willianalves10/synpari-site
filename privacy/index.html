@@ -149,7 +149,7 @@
         <li><strong>Relatórios de erro</strong>: quando o app falha, ele pode enviar a mensagem do erro, detalhes técnicos (versão do app, plataforma) e o id da sua conta, para corrigirmos o problema.</li>
         <li><strong>Se você entrar com a Apple (iPhone)</strong>: recebemos seu identificador de usuário da Apple e seu endereço de e-mail, que pode ser um endereço de retransmissão privado se você escolher "Ocultar meu e-mail". Não pedimos seu nome à Apple. Também guardamos um token de atualização da Apple, só em nossos servidores, usado para uma única coisa: revogar o acesso do Synpari à sua conta Apple quando você excluir sua conta. Ele é apagado junto com a conta.</li>
         <li><strong>Se você entrar com o Google (Android)</strong>: recebemos o e-mail da sua conta Google e o link da sua foto de perfil do Google. Não usamos o nome do Google: você digita o seu.</li>
-        <li><strong>Foto de perfil (opcional)</strong>: você pode escolher uma foto da galeria, tirar uma com a câmera ou, se entrou com o Google, usar a sua foto do Google. A foto da galeria ou da câmera é redimensionada e recodificada no seu celular, o que remove metadados como EXIF e localização GPS, e depois fica guardada no nosso armazenamento de arquivos privado (Supabase). Uma foto por pessoa: uma foto nova substitui a anterior. Só os membros dos espaços de que você faz parte podem vê-la. Ela é apagada quando você a remove ou quando exclui sua conta.</li>
+        <li><strong>Foto de perfil (opcional)</strong>: você pode escolher uma foto da galeria, tirar uma com a câmera ou, se entrou com o Google, usar a sua foto do Google. A foto da galeria ou da câmera é redimensionada e recodificada no seu celular, o que remove metadados como EXIF e localização GPS, e depois fica guardada no nosso armazenamento privado de arquivos (Supabase). Uma foto por pessoa: uma foto nova substitui a anterior. Só os membros dos espaços de que você faz parte podem vê-la. Ela é apagada quando você a remove ou quando exclui sua conta.</li>
       </ul>
       <p>Nossos provedores também tratam dados técnicos necessários ao serviço, como seu endereço IP nos registros dos servidores.</p>
 
@@ -172,7 +172,7 @@
         <li><strong>Google Firebase Cloud Messaging</strong>: entrega das notificações push no Android.</li>
         <li><strong>Apple Push Notification service (APNs)</strong>: entrega das notificações push no iPhone.</li>
         <li><strong>Apple (Entrar com a Apple)</strong>: login no iPhone e revogação do acesso quando você exclui sua conta.</li>
-        <li><strong>Google (Google Sign-In)</strong>: login no Android.</li>
+        <li><strong>Google (login com o Google)</strong>: login no Android.</li>
         <li><strong>Google Play</strong>: distribuição do app e processamento do pagamento das assinaturas (Google Play Billing).</li>
         <li><strong>Apple App Store</strong>: distribuição do app e processamento do pagamento das assinaturas (Apple In-App Purchase). O <strong>TestFlight</strong> é usado apenas para testes beta.</li>
         <li><strong>RevenueCat</strong>: gestão do status das assinaturas. Recebe um identificador de usuário do app, o status da compra e da assinatura, a loja utilizada e o país e a moeda da compra.</li>
@@ -223,13 +223,13 @@
         <li><strong>Informes de errores</strong>: cuando la app falla, puede enviar el mensaje de error, detalles técnicos (versión de la app, plataforma) y el id de tu cuenta, para corregir el problema.</li>
         <li><strong>Si inicias sesión con Apple (iPhone)</strong>: recibimos tu identificador de usuario de Apple y tu correo electrónico, que puede ser una dirección de retransmisión privada si eliges "Ocultar mi correo". No le pedimos tu nombre a Apple. También guardamos un token de actualización de Apple, solo en nuestros servidores, que usamos para una única cosa: revocar el acceso de Synpari a tu cuenta de Apple cuando eliminas tu cuenta. Se borra junto con la cuenta.</li>
         <li><strong>Si inicias sesión con Google (Android)</strong>: recibimos el correo de tu cuenta de Google y el enlace de tu foto de perfil de Google. No usamos el nombre de Google: escribes el tuyo.</li>
-        <li><strong>Foto de perfil (opcional)</strong>: puedes elegir una foto de la galería, tomar una con la cámara o, si iniciaste sesión con Google, usar tu foto de Google. La foto de la galería o de la cámara se reduce y se vuelve a codificar en tu teléfono, lo que elimina metadatos como EXIF y la ubicación GPS, y después se guarda en nuestro almacenamiento privado de archivos (Supabase). Una foto por persona: una foto nueva reemplaza la anterior. Solo los miembros de los espacios a los que perteneces pueden verla. Se borra cuando la quitas o cuando eliminas tu cuenta.</li>
+        <li><strong>Foto de perfil (opcional)</strong>: puedes elegir una foto de la galería, tomar una con la cámara o, si iniciaste sesión con Google, usar tu foto de Google. La foto de la galería o de la cámara se redimensiona y se recodifica en tu teléfono, lo que elimina metadatos como EXIF y la ubicación GPS, y después se guarda en nuestro almacenamiento privado de archivos (Supabase). Una foto por persona: una foto nueva reemplaza la anterior. Solo los miembros de los espacios a los que perteneces pueden verla. Se borra cuando la quitas o cuando eliminas tu cuenta.</li>
       </ul>
       <p>Nuestros proveedores también procesan datos técnicos necesarios para el servicio, como tu dirección IP en los registros de sus servidores.</p>
 
       <h2>Cámara, galería de fotos y widget</h2>
       <ul>
-        <li><strong>Cámara</strong>: se usa solo para tomar tu foto de perfil y, en Brasil, para leer el código de barras o el código QR de Pix de una cuenta. La lectura ocurre en tu teléfono: no se guarda ni se envía ninguna foto ni video de la cámara. Solo se conserva el código leído, como texto, si lo guardas en la cuenta.</li>
+        <li><strong>Cámara</strong>: se usa solo para tomar tu foto de perfil y, en Brasil, para leer el código de barras o el código QR de Pix de una cuenta. La lectura ocurre en tu teléfono: no se guarda ni se envía ninguna foto o video de la cámara. Solo se conserva el código leído, como texto, si lo guardas en la cuenta.</li>
         <li><strong>Galería de fotos</strong>: se usa solo para que elijas una foto de perfil. Synpari no lee tus otras fotos.</li>
         <li><strong>Widget de Android en la pantalla de inicio</strong>: muestra cuánto falta por pagar y tu próxima cuenta en la pantalla de inicio, con un resumen que la app guarda en tu teléfono. El widget no recopila nada nuevo y no envía datos a ningún lugar.</li>
       </ul>
@@ -246,7 +246,7 @@
         <li><strong>Google Firebase Cloud Messaging</strong>: entrega de notificaciones push en Android.</li>
         <li><strong>Apple Push Notification service (APNs)</strong>: entrega de notificaciones push en iPhone.</li>
         <li><strong>Apple (Iniciar sesión con Apple)</strong>: inicio de sesión en iPhone y revocación del acceso cuando eliminas tu cuenta.</li>
-        <li><strong>Google (Google Sign-In)</strong>: inicio de sesión en Android.</li>
+        <li><strong>Google (inicio de sesión con Google)</strong>: inicio de sesión en Android.</li>
         <li><strong>Google Play</strong>: distribución de la app y procesamiento del pago de las suscripciones (Google Play Billing).</li>
         <li><strong>Apple App Store</strong>: distribución de la app y procesamiento del pago de las suscripciones (Apple In-App Purchase). <strong>TestFlight</strong> se usa solo para pruebas beta.</li>
         <li><strong>RevenueCat</strong>: gestión del estado de las suscripciones. Recibe un identificador de usuario de la app, el estado de la compra y de la suscripción, la tienda utilizada y el país y la moneda de la compra.</li>
@@ -256,7 +256,7 @@
       <h2>Cuánto tiempo los conservamos</h2>
       <ul>
         <li>Datos de la cuenta y de los espacios: mientras exista tu cuenta.</li>
-        <li>Al eliminar la cuenta, borramos tu perfil, correo, acceso, foto de perfil, token de Apple (si iniciaste sesión con Apple), token de push, notificaciones, invitaciones que creaste e informes de errores. Los espacios en los que no participa nadie más se eliminan por completo. En los espacios compartidos con otras personas, las cuentas, partes, acuerdos y el historial se quedan para ellas (para que sus totales no cambien), y apareces como "Ex miembro", sin nombre ni correo.</li>
+        <li>Al eliminar la cuenta, borramos tu perfil, correo, acceso, foto de perfil, token de Apple (si iniciaste sesión con Apple), token de push, notificaciones, invitaciones que creaste e informes de errores. Los espacios en los que no participa nadie más se eliminan por completo. En los espacios compartidos con otras personas, las cuentas, partes, acuerdos y el historial se quedan para ellas (para que sus totales no cambien), y apareces como "Exmiembro", sin nombre ni correo.</li>
         <li>Las estadísticas anónimas de instalación se conservan de forma agregada.</li>
         <li>Las copias de seguridad de los proveedores se rotan automáticamente y caducan según su plazo normal.</li>
       </ul>
