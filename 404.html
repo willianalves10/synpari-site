@@ -1,11 +1,14 @@
 <!doctype html>
 <!--
-  Serves every unknown path on GitHub Pages. /join/CODE shows the invite;
-  anything else shows "page not found".
+  Serves every unknown path on GitHub Pages (and /join/ itself: join/index.html is a copy of this file; keep them equal).
+  /join/CODE shows the invite; anything else shows "page not found".
 
-  It tries to open the app and, when the app is not installed (or the phone is
-  not Android), shows the code and the store link.
-  STORE_URL is empty until the app is on Google Play (the button stays hidden).
+  - Android: tries to open the app (synpari://); if it is not installed, shows the code, "Copy code" and the Google Play
+    button. The Play link carries referrer=invite_code%3DCODE, so the app, on its first launch, reads the Play Install
+    Referrer and pre-fills the code. App Links (assetlinks.json) open the app directly when it is already installed.
+  - iPhone: NEVER tries synpari:// on its own (it shows an error when the app is missing). Shows the code, "Copy code" and
+    the App Store button; "Open in the app" is a button the person taps. The app does not read the clipboard.
+  - Desktop: both store buttons.
 -->
 <html lang="en">
 <head>
@@ -22,11 +25,12 @@
     .logo { width: 88px; height: auto; margin: 0 auto 8px; display: block; }
     h1 { font-family: "Instrument Serif", Georgia, serif; font-weight: 400; font-size: 36px; line-height: 1.1; margin: 8px 0; letter-spacing: -0.4px; }
     p { color: var(--slate); font-size: 16px; line-height: 1.45; margin: 8px 0; }
-    .code { display: inline-block; margin: 18px 0 6px; padding: 14px 22px; background: #fff; border: 1px solid var(--line); border-radius: 20px;
-            font-size: 34px; font-weight: 800; letter-spacing: 6px; color: var(--deep); }
-    .btn { display: block; width: 100%; margin-top: 12px; padding: 16px; border-radius: 16px; font-size: 16px; font-weight: 800; text-decoration: none; }
+    .code { display: block; margin: 18px 0 6px; padding: 18px 22px; background: #fff; border: 2px solid var(--pine); border-radius: 20px;
+            font-size: 44px; font-weight: 800; letter-spacing: 8px; color: var(--deep); user-select: all; -webkit-user-select: all; }
+    .btn { display: block; width: 100%; margin-top: 12px; padding: 16px; border: 0; border-radius: 16px; font-family: inherit; font-size: 16px; font-weight: 800; text-align: center; text-decoration: none; cursor: pointer; }
     .primary { background: var(--pine); color: #fff; }
     .secondary { background: var(--mint); color: var(--deep); }
+    .step { margin-top: 18px; font-size: 14px; font-weight: 700; color: var(--deep); }
     .hint { font-size: 13px; }
     [hidden] { display: none !important; }
   </style>
@@ -43,53 +47,95 @@
     <p id="subtitle">Opening the app...</p>
 
     <div id="fallback" hidden>
-      <p id="fallback-text">If the app did not open, install it and use this code:</p>
-      <div class="code" id="code">------</div>
-      <a class="btn primary" id="open" href="#">Open in the app</a>
-      <a class="btn secondary" id="store" href="#" hidden>Get Synpari</a>
-      <p class="hint" id="hint">Open Synpari, choose "I have a code" and type the code above.</p>
+      <p id="fallback-text">Your invite code:</p>
+      <div class="code" id="code" aria-live="polite">------</div>
+      <button type="button" class="btn secondary" id="copy">Copy code</button>
+
+      <p class="step" id="step">1. Install the app</p>
+      <a class="btn primary" id="play" href="#" hidden>Get it on Google Play</a>
+      <a class="btn primary" id="ios" href="#" hidden>Download on the App Store</a>
+
+      <a class="btn secondary" id="open" href="#">Open in the app</a>
+      <p class="hint" id="hint">Then open Synpari and tap "I have an invite code".</p>
     </div>
   </main>
 
   <script>
     (function () {
-      var STORE_URL = "";
+      var PLAY_URL = "https://play.google.com/store/apps/details?id=com.synpariapp.synpari";
+      var IOS_URL = "https://apps.apple.com/app/id6823784562";
       var T = {
-        en: { notFound: "Page not found", title: "You were invited to Synpari", opening: "Opening the app...", fallback: "If the app did not open, install it and use this code:", open: "Open in the app", store: "Get Synpari", hint: "Open Synpari, choose \"I have a code\" and type the code above." },
-        pt: { notFound: "Página não encontrada", title: "Você foi convidado para o Synpari", opening: "Abrindo o app...", fallback: "Se o app não abriu, instale-o e use este código:", open: "Abrir no app", store: "Baixar o Synpari", hint: "Abra o Synpari, escolha \"Tenho um código\" e digite o código acima." },
-        es: { notFound: "Página no encontrada", title: "Te invitaron a Synpari", opening: "Abriendo la app...", fallback: "Si la app no se abrió, instálala y usa este código:", open: "Abrir en la app", store: "Descargar Synpari", hint: "Abre Synpari, elige \"Tengo un código\" y escribe el código de arriba." }
+        en: { notFound: "Page not found", title: "You were invited to Synpari", opening: "Opening the app...", fallback: "Your invite code:", copy: "Copy code", copied: "Code copied", step: "1. Install the app", open: "Open in the app", play: "Get it on Google Play", ios: "Download on the App Store", hintAndroid: "The code is filled in for you when you open the app. If it is not, tap \"I have an invite code\" and paste it.", hintIos: "Then open Synpari, tap \"I have an invite code\" and paste the code you copied.", hintOther: "Then open Synpari on your phone, tap \"I have an invite code\" and type the code." },
+        pt: { notFound: "Página não encontrada", title: "Você foi convidado para o Synpari", opening: "Abrindo o app...", fallback: "Seu código de convite:", copy: "Copiar código", copied: "Código copiado", step: "1. Instale o app", open: "Abrir no app", play: "Disponível no Google Play", ios: "Baixar na App Store", hintAndroid: "O código já vem preenchido quando você abrir o app. Se não vier, toque em \"Tenho um código de convite\" e cole.", hintIos: "Depois abra o Synpari, toque em \"Tenho um código de convite\" e cole o código que você copiou.", hintOther: "Depois abra o Synpari no celular, toque em \"Tenho um código de convite\" e digite o código." },
+        es: { notFound: "Página no encontrada", title: "Te invitaron a Synpari", opening: "Abriendo la app...", fallback: "Tu código de invitación:", copy: "Copiar código", copied: "Código copiado", step: "1. Instala la app", open: "Abrir en la app", play: "Disponible en Google Play", ios: "Descargar en la App Store", hintAndroid: "El código ya viene escrito cuando abras la app. Si no, toca \"Tengo un código de invitación\" y pégalo.", hintIos: "Luego abre Synpari, toca \"Tengo un código de invitación\" y pega el código que copiaste.", hintOther: "Luego abre Synpari en tu celular, toca \"Tengo un código de invitación\" y escribe el código." }
       };
       var lang = (navigator.language || "en").slice(0, 2);
       var t = T[lang] || T.en;
+      var ua = navigator.userAgent || "";
+      var isAndroid = /Android/i.test(ua);
+      var isIos = /iPhone|iPad|iPod/i.test(ua) || (/Macintosh/i.test(ua) && navigator.maxTouchPoints > 1);
+
+      function el(id) { return document.getElementById(id); }
 
       // The code is the last path segment: /join/ABC123
       var parts = location.pathname.split("/").filter(Boolean);
-      if (parts[0] !== "join") { document.getElementById("title").textContent = t.notFound; document.getElementById("subtitle").innerHTML = "<a href=\"/\">synpariapp.com</a>"; return; }
+      if (parts[0] !== "join") { el("title").textContent = t.notFound; el("subtitle").innerHTML = "<a href=\"/\">synpariapp.com</a>"; return; }
       var code = decodeURIComponent(parts[parts.length - 1] || "").toUpperCase().replace(/[^A-Z0-9]/g, "");
+      if (code.length > 12) code = code.slice(0, 12);
 
       document.documentElement.lang = lang;
-      document.getElementById("title").textContent = t.title;
-      document.getElementById("subtitle").textContent = t.opening;
-      document.getElementById("fallback-text").textContent = t.fallback;
-      document.getElementById("open").textContent = t.open;
-      document.getElementById("store").textContent = t.store;
-      if (STORE_URL) { var s = document.getElementById("store"); s.href = STORE_URL; s.hidden = false; }
-      document.getElementById("hint").textContent = t.hint;
-      document.getElementById("code").textContent = code || "------";
+      el("title").textContent = t.title;
+      el("subtitle").textContent = t.opening;
+      el("fallback-text").textContent = t.fallback;
+      el("copy").textContent = t.copy;
+      el("step").textContent = t.step;
+      el("open").textContent = t.open;
+      el("play").textContent = t.play;
+      el("ios").textContent = t.ios;
+      el("code").textContent = code || "------";
 
-      var appLink = "synpari://join/" + encodeURIComponent(code);
-      document.getElementById("open").setAttribute("href", appLink);
+      // Play: the code travels through the installation (Play Install Referrer). "invite_code=CODE", URL-encoded once.
+      el("play").href = code ? PLAY_URL + "&referrer=" + encodeURIComponent("invite_code=" + code) : PLAY_URL;
+      el("ios").href = IOS_URL;
+      el("open").href = "synpari://join/" + encodeURIComponent(code);
+
+      if (isAndroid) { el("play").hidden = false; el("hint").textContent = t.hintAndroid; }
+      else if (isIos) { el("ios").hidden = false; el("hint").textContent = t.hintIos; }
+      else { el("play").hidden = false; el("ios").hidden = false; el("hint").textContent = t.hintOther; }
+
+      function copyText(text) {
+        if (navigator.clipboard && navigator.clipboard.writeText) return navigator.clipboard.writeText(text);
+        return new Promise(function (resolve, reject) {
+          var ta = document.createElement("textarea");
+          ta.value = text; ta.setAttribute("readonly", ""); ta.style.position = "fixed"; ta.style.opacity = "0";
+          document.body.appendChild(ta); ta.select();
+          try { document.execCommand("copy") ? resolve() : reject(); } catch (e) { reject(e); } finally { document.body.removeChild(ta); }
+        });
+      }
+      el("copy").addEventListener("click", function () {
+        var btn = el("copy");
+        copyText(code).then(function () {
+          btn.textContent = t.copied;
+          setTimeout(function () { btn.textContent = t.copy; }, 2000);
+        }, function () {
+          // Could not copy: select the code so the person can copy it by hand.
+          var range = document.createRange(); range.selectNodeContents(el("code"));
+          var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(range);
+        });
+      });
 
       function showFallback() {
-        document.getElementById("subtitle").hidden = true;
-        document.getElementById("fallback").hidden = false;
+        el("subtitle").hidden = true;
+        el("fallback").hidden = false;
       }
 
       if (!code) { showFallback(); return; }
 
-      // If the app is installed (and App Links are not already handling this address), this opens it.
+      // Only Android tries the custom scheme by itself. On an iPhone without the app it shows an error, and on a computer it
+      // does nothing: those show the page right away (the iPhone person taps "Open in the app" if the app is installed).
+      if (!isAndroid) { showFallback(); return; }
       var started = Date.now();
-      window.location.href = appLink;
+      window.location.href = "synpari://join/" + encodeURIComponent(code);
       setTimeout(function () {
         // Still here after 1.5s: the app did not take over.
         if (Date.now() - started < 4000) showFallback();
